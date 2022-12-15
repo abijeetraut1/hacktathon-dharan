@@ -16,3 +16,6 @@ speak.addEventListener('click', (el) => {
 openCamera.addEventListener('click', () => {
     alert('camera is opening')
 })
+
+
+
