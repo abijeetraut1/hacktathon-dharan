@@ -1,6 +1,5 @@
-const app = require('./app');
-const port = 80;
+const app = require("./app");
 
-app.listen(80, () => {
-    console.log('SERVER IS RUNNING');
-})
+app.listen(3000, () => {
+  console.log("server has started on port 3000");
+});

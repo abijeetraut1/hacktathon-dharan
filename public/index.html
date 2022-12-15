@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <!-- <style>
+        .camera-container{
+            margin-top: 1rem;
+            /* background-color: black; */
+            height: fit-content;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            
+        }
+        
+        .open-in-div-camera{
+            background-color: black;
+            border-radius: 1.2rem;
+            height: 50rem;
+            width: 80rem;
+        }
+    </style> -->
+</head>
+
+<body>
+    <input type="textarea" class="textbox">
+    <input type="button" value="SPEAK" class="button">
+    <input type="button" value="click to open camera" class="open-camera">
+    <img src="./js/cat.jpg" alt="" class="image">
+    <!-- <div class="camera-container">
+        <div class="open-in-div-camera">
+            
+        </div>
+    </div> -->
+    <button id="start-camera">Start Camera</button>
+    <video id="video" width="320" height="240" autoplay></video>
+    <button id="click-photo">Click Photo</button>
+    <canvas id="canvas" width="320" height="240"></canvas>
+
+    <script src="../js/index.js"></script>
+</body>
+
+</html>
