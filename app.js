@@ -23,6 +23,8 @@ app.all("*", (req, res, next) => {
 // if the file is greater then 10kb then i will not be accepted
 // app.use(express.json({ limit: "10kb" }))
 // app.use(cookieParser());
+// app.use(express.json({ limit: "10kb" }));
+// app.use(cookieParser());
 
 // app.listen(3000,()=>)
 module.exports = app;
