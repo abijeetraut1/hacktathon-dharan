@@ -1,5 +1,6 @@
 const speak = document.querySelector('.button');
 const text = document.querySelector('.textbox');
+const openCamera = document.querySelector('.open-camera');
 
 let speakOnClick =  ( message) => {
     var msg = new SpeechSynthesisUtterance();
@@ -12,3 +13,6 @@ speak.addEventListener('click', (el) => {
 });
 
 // CLICK TO OPEN CAMERA
+openCamera.addEventListener('click', () => {
+    alert('camera is opening')
+})
