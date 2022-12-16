@@ -12,9 +12,12 @@
             position: absolute;
             left: 0;
         }
-        .just-div{
+
+        .just-div {
             position: absolute;
         }
+
+        
     </style>
 </head>
 
@@ -43,12 +46,26 @@
 
         </canvas>
     </div>
-    <script type="text/javascript" src="https://unpkg.com/opencv-copy@3.0.6/lib/opencv.js"></script>
+
+    <!-- <section id="demos" class="invisible">
+
+        <p>Hold some objects up close to your webcam to get a real-time classification! When ready click "enable webcam"
+            below and accept access to the webcam when the browser asks (check the top left of your window)</p>
+
+        <div id="liveView" class="camView">
+            <button id="webcamButton">Enable Webcam</button>
+            <video id="webcam" autoplay muted width="640" height="480"></video>
+        </div>
+    </section> -->
+
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    
     
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+    
     <script src="./index.js"></script>
 
 
