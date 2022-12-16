@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
-    
+
 </head>
+
 <body>
     <input type="textarea" class="textbox">
-    <input type="button" value="SPEAK" class="button"> 
+    <input type="button" value="SPEAK" class="button">
     <input type="button" value="click to open camera" class="open-camera">
     <input type="button" value="click to record" class="record-audio">
-    
-    <script src="./../js/index.js"></script>
+
+    <!-- click photo -->
+    <button id="start-camera">Start Camera</button>
+    <video id="video" width="320" height="240" autoplay></video>
+    <button id="click-photo">Click Photo</button>
+    <canvas id="canvas" width="320" height="240" ></canvas>
+
+    <!-- <img id="img" crossorigin alt="image" style='display:none' width="600px" height="600px"
+        src="https://media.gettyimages.com/id/103576434/photo/man-shopping.jpg?s=612x612&w=gi&k=20&c=jN8ei-1dFPSYx08JBPfOVFx28GJHYT2F7qqJ4zTEKeQ=" /> -->
+
+    <!-- <img id="imgage-display" crossorigin alt="image" style='display:none' width="600px" height="600px"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7qJd3pqbTJui3l_LtBgP01nA3_IuZLj3-iA&usqp=CAU" /> -->
+
+
+    <canvas id="myCanvas">
+
+    </canvas>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+
+    <script src="./index.js"></script>
+
+
 </body>
+
 </html>

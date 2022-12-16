@@ -5,11 +5,14 @@ const speak = document.querySelector(".button");
 
 const text = document.querySelector(".textbox");
 
-let speakOnClick = (message) => {
+let speakFunction = (message) => {
     var msg = new SpeechSynthesisUtterance();
-    msg.text = "IF YOU ARE BLIND PRESS THE SCREEN THREE TIMES";
+    msg.text = message;
     window.speechSynthesis.speak(msg);
 };
+
+
+
 
 // window.addEventListener("load", function () {
 //   // Call your function here
@@ -17,7 +20,8 @@ let speakOnClick = (message) => {
 // });
 
 window.onbeforeunload = function () {
-    speakOnClick();
+    //  UNCOMMENTED AFTER CERTAIN TIME
+    // speakFunction('IF YOU ARE BLIND PRESS THE SCREEN THREE TIMES');
 };
 
 // speak.addEventListener("click", (el) => {
@@ -55,41 +59,86 @@ function startRecognition() {
     }
 }
 
-// CLICK TO OPEN CAMERA
-// load the object detection model
-const imageRecognigation = async () => {
-    const model = await tf.loadLayersModel('model.json');
 
-    // load the image to be analyzed
-    const imgElement = document.getElementById('image');
-    const img = tf.browser.fromPixels(imgElement);
+// click to click photo starts
+let camera_button = document.querySelector("#start-camera");
+let video = document.querySelector("#video");
+let click_button = document.querySelector("#click-photo");
+let canvas = document.querySelector("#canvas");
+let imageURLhold;
 
-    // run the object detection model on the image
-    const detections = await model.predict(img);
+camera_button.addEventListener('click', async function() {
+    let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    video.srcObject = stream;
+});
 
-    // interpret the model's output to identify and locate the objects in the image
-    const objects = [];
-    for (let i = 0; i < detections.length; i++) {
-        // extract the class and bounding box of the i-th detected object
-        const classId = detections[i][0];
-        const x = detections[i][1];
-        const y = detections[i][2];
-        const width = detections[i][3];
-        const height = detections[i][4];
+click_button.addEventListener('click', function() {
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    let image_data_url = canvas.toDataURL('image/jpeg');
 
-        // add the detected object to the list of objects
-        objects.push({
-            classId,
-            x,
-            y,
-            width,
-            height
-        });
-    }
+    // data url of the image
+    imageURLhold = image_data_url;
+    sessionStorage.setItem('click image', imageURLhold)
+    console.log('imagehjd',imageURLhold);
+    // console.log(image_data_url);
+    
+});
 
-    // visualize the detected objects in the image
-    drawBoundingBoxes(objects);
+// click to click photo ends
 
+
+
+
+// BELOW CODE COMMENTED FOR CERTAIN BIT OF TIME
+// image recognication starts
+if(imageURLhold){
+    console.log(true)
 }
+window.onload = function () {
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("canvas");
+    // var img = document.getElementById("imgage-display");
+    ctx.canvas.width = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
+    ctx.drawImage(img, 0, 0, 600, 600);
+};
+// const img = document.getElementById('imgage-displayimgage-display');
+const img = document.getElementById('canvas');
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
 
-imageRecognigation();
+// Load the model.
+
+cocoSsd.load().then(model => {
+    console.log('predic',img)
+    // detect objects in the image.
+    model.detect(img).then(predictions => {
+        console.log('Predictions: ', predictions);
+        predictions.forEach(function (p) {
+            ctx.beginPath();
+            ctx.font = "bold 30px Arial";
+            ctx.strokeStyle = "#000";
+            ctx.rect(p.bbox[0], p.bbox[1], p.bbox[2], p.bbox[3]);
+            ctx.strokeStyle = "#FFFF00";
+            ctx.stroke();
+            ctx.fillStyle = "#FFFF00";
+            ctx.fillText(p.class, (p.bbox[0]), p.bbox[1]);
+        });
+        // speak function
+        // if (predictions.length === 1) {
+        //     afterResult(`${predictions[0].class}`);
+        // } else {
+        //     predictions.forEach((el, i) => {
+        //         // console.log(predictions[i].class);
+        //         // speakFunction(`${predictions[i].class}`)
+        //         console.log('speak fucntin ')
+        //         var msg = new SpeechSynthesisUtterance();
+        //         msg.text = predictions[i].class;
+        //         window.speechSynthesis.speak(msg);
+        //     })
+        // }
+    });
+});
+
+// image recognication ends

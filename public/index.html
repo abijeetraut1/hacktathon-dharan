@@ -42,7 +42,38 @@
     <button id="click-photo">Click Photo</button>
     <canvas id="canvas" width="320" height="240"></canvas>
 
-    <script src="../js/index.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+    <!-- <script src="../js/index.js"></script> -->
+    <script>
+        $(function () {
+            var params = {
+                // Request parameters
+                "features": "{string}",
+                "model-version": "latest",
+                "language": "en",
+                "smartcrops-aspect-ratios": "{string}",
+            };
+
+            $.ajax({
+                url: "https://westus.api.cognitive.microsoft.com/computervision/imageanalysis:analyze?api-version=2022-10-12-preview&" + $.param(params),
+                beforeSend: function (xhrObj) {
+                    // Request headers
+                    xhrObj.setRequestHeader("Content-Type", "application/json");
+                    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "{subscription key}");
+                },
+                type: "POST",
+                // Request body
+                data: "{body}",
+            })
+                .done(function (data) {
+                    alert("success");
+                })
+                .fail(function () {
+                    alert("error");
+                });
+        });
+    </script>
 </body>
 
 </html>
