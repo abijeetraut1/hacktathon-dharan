@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
 
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
+
     <style>
         #myCanvas {
             position: absolute;
@@ -17,7 +20,11 @@
             position: absolute;
         }
 
-        
+
+        #map {
+            height: 20rem;
+            width: 20rem;
+        }
     </style>
 </head>
 
@@ -32,40 +39,34 @@
     <video id="video" width="320" height="240" autoplay></video>
     <button id="click-photo">Click Photo</button>
 
-    <!-- <img id="img" crossorigin alt="image" style='display:none' width="600px" height="600px"
-        src="https://media.gettyimages.com/id/103576434/photo/man-shopping.jpg?s=612x612&w=gi&k=20&c=jN8ei-1dFPSYx08JBPfOVFx28GJHYT2F7qqJ4zTEKeQ=" /> -->
-
-    <!-- <img id="imgage-display" crossorigin alt="image" style='display:none' width="600px" height="600px"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7qJd3pqbTJui3l_LtBgP01nA3_IuZLj3-iA&usqp=CAU" /> -->
-
-
     <div class="just-div">
-
         <canvas id="canvas" width="320" height="240"></canvas>
-        <canvas id="myCanvas">
-
-        </canvas>
+        <canvas id="myCanvas"></canvas>
     </div>
-
-    <!-- <section id="demos" class="invisible">
-
-        <p>Hold some objects up close to your webcam to get a real-time classification! When ready click "enable webcam"
-            below and accept access to the webcam when the browser asks (check the top left of your window)</p>
-
-        <div id="liveView" class="camView">
-            <button id="webcamButton">Enable Webcam</button>
-            <video id="webcam" autoplay muted width="640" height="480"></video>
-        </div>
-    </section> -->
 
     <video id="video" width="640" height="480" autoplay></video>
     <canvas id="canvas" width="640" height="480"></canvas>
 
-    
-    
+    <div id="map">
+        <input id='search-input' type='text'>
+    </div>
+
+
+    <script>
+
+
+
+
+
+    </script>
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
-    
+
+
     <script src="./index.js"></script>
 
 
