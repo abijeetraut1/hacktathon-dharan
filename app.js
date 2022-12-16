@@ -4,7 +4,11 @@ const ejs = require("ejs");
 const app = express();
 const homeRoute = require("./routes/homeRoute");
 const bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
 
+app.use(cookieParser());
+
+app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));

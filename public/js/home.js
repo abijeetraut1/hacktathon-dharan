@@ -1,13 +1,11 @@
-let speakOnClick = (message) => {
+window.onload = function (event) {
+  speakFunction("IF you are blind press the screen three times");
+};
+let speakFunction = (message) => {
   var msg = new SpeechSynthesisUtterance();
-  msg.text = "IF YOU ARE BLIND PRESS THE SCREEN THREE TIMES";
+  msg.text = message;
   window.speechSynthesis.speak(msg);
 };
-
-window.onbeforeunload = function () {
-  speakOnClick("IF YOU ARE BLIND PRESS THE SCREEN THREE TIMES");
-};
-
 var b = document.getElementById("blind");
 var deaf = document.getElementById("deaf");
 var dump = document.getElementById("dump");
