@@ -1,0 +1,168 @@
+<!Doctype html>
+<html lang="en">
+<head>
+  <title>WeHelp</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      height: 100vh;
+      width: 100vw;
+      padding: 40px 30px 18px 30px;
+      background: linear-gradient(-45deg, rgb(60, 136, 236)0%, rgb(25, 82, 161)0%, rgb(48, 77, 136)37%, rgb(24, 64, 112)75%, rgb(73, 123, 192)100%);
+    }
+    .wrapper {
+      min-height: 85vh;
+      border-radius: 8px;
+      background: rgb(202, 213, 240)
+    }
+    .img {
+      padding: 15px;
+      margin-top: 15%;
+      width: 100%;
+    }
+    .landing-content {
+      margin: 10px;
+      padding: 5px;
+    }
+    .landing-content>.choose-option {
+      padding: 10px;
+    }
+    .form-select {
+      background-color: rgb(23, 112, 230);
+      color: white;
+      width: 200px;
+    }
+    .content-submit {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .content-submit>input {
+      min-width: 85%;
+      margin-top: 20px;
+    }
+    .card {
+      margin-top: 20%;
+      width: 360px;
+      padding: 30px 0px 30px;
+      background: transparent;
+    }
+    .option-content {
+      width: 300px;
+      margin: auto;
+    }
+    .option-content>.blind,
+    .deaf,
+    .dump {
+      padding: 5px;
+      cursor: pointer;
+      margin: 6px;
+      border-radius: 10px;
+      background-color: rgb(135, 169, 231);
+      border: 1px solid rgb(148, 178, 235);
+    }
+    .option-content :hover {
+      background-color: rgb(100, 128, 170);
+      color: white;
+    }
+    .form-check-input {
+      font-size: 20px;
+    }
+    .form-check-input:hover {
+      border: 2px solid white;
+    }
+    .form-check-label {
+      font-size: 20px;
+      margin-left: 20px;
+      text-align: center;
+    }
+    label>span {
+      margin-left: 20px;
+    }
+    .card>h4 {
+      margin-left: 23px;
+    }
+    @media(300px <= width <=360px) {
+     .card{
+      width: 280px;
+     }
+     .option-content>.blind,
+    .deaf,
+    .dump {
+      width: 230px;
+    }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card shadow">
+            <h4 class="choose-option" for="select option">Choose Your Options:</h4>
+            <div class="landing-content">
+              <div class="option-content">
+                <div class="blind">
+                  <label for="Blind" class="form-check-label">
+                    <input type="radio" name="Blind" class="form-check-input" id="blind">
+                    <span>Blind<span>
+                  </label>
+                </div>
+                <div class="deaf">
+                  <label for="Blind" class="form-check-label">
+                    <input type="radio" name="Blind" class="form-check-input" id="deaf">
+                    <span>Deaf<span>
+                  </label>
+                </div>
+                <div class="dump">
+                  <label for="Blind" class="form-check-label">
+                    <input type="radio" name="Blind" class="form-check-input" id="dump">
+                    <span>Dump<span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="content-submit">
+              <input type="submit" class="btn btn-primary" value="Let Me In">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="image-conent">
+            <img src="images/undraw_web_browsing_p-77-h.svg" alt="Not found" class="img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var b = document.getElementById('blind');
+    var deaf = document.getElementById('deaf');
+    var dump = document.getElementById('dump');
+    var i=0;
+    window.addEventListener("click", () => {
+      i++;
+      console.log(i);
+      if(i===3){
+        alert("hello")
+        i=0;
+      }else{
+        console.log("Not working")
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+</body>
+</html>
