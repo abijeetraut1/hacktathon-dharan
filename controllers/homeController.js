@@ -23,13 +23,7 @@ const createToken = (user, statusCode, res) => {
   //send cookie in response
 
   res.cookie("jwt", token, cookieOptions);
-  res.status(statusCode).json({
-    status: "sucess",
-    token,
-    data: {
-      user,
-    },
-  });
+  res.redirect("/features");
 };
 
 exports.homeController = async (req, res) => {
@@ -53,8 +47,12 @@ exports.getUsers = async (req, res) => {
   });
 };
 
+exports.dumbFeature = async (req, res) => {
+  res.render("dumbFeature");
+};
 exports.postRegister = async (req, res) => {
-  const { name, phone } = req.body;
+  const { name } = req.body;
+  const phone = req.body.phone || 9816366094;
   if (!name) return res.send("name is required");
   const userExists = await User.findOne({ name: name });
   if (userExists) return res.render("register");
@@ -70,6 +68,22 @@ exports.getImageRecognition = async (req, res) => {
 };
 exports.getSpeechToText = async (req, res) => {
   res.render("getSpeechToText");
+};
+exports.sendMyLocation = async (req, res) => {
+  res.render("sendMyLocation");
+};
+exports.getLocation = async (req, res) => {
+  const { id } = req.user;
+  const { location } = req.body;
+  if (!location) return;
+  const user = await User.findById(id);
+  user.location = location;
+  await user.save();
+
+  res.json({
+    status: 200,
+    location,
+  });
 };
 exports.test = async (req, res) => {
   // var config = {

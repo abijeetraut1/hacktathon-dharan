@@ -20,7 +20,7 @@ let speakFunction = (message) => {
 if (getCookie("userType") == "blind") {
   window.onload = function (event) {
     speakFunction(
-      "You are on the register page right now please say your name and phoneNumber for registration"
+      "You are on the register page right now please say your name for registration"
     );
     setTimeout(() => startRecognition(), 7000);
   };
@@ -49,6 +49,11 @@ function startRecognition() {
     recognition.onresult = function (event) {
       console.log(event.results[0]);
       var text = event.results[0][0].transcript;
+      // if (!text) {
+      //   document.reload();
+      //   speakFunction("Please say your name again");
+      //   setTimeout(() => startRecognition(), 2000);
+      // }
 
       let data = { name: text };
       document.cookie = `name=${text}`;
@@ -59,9 +64,12 @@ function startRecognition() {
       }).then((res) => {
         console.log("Request complete! response:", res);
         speakFunction(
-          `You are registered sucesfully, welcome to the feature page ${text} please select the feature number`
+          `You are registered sucesfully, welcome to the feature page ${text}`
         );
-        window.location.replace("features");
+
+        if (getCookie("userType") === "blind")
+          window.location.replace("features");
+        else window.location.replace("dumbfeature");
       });
 
       // axios.post("/register", { name: text }).then((res) => {

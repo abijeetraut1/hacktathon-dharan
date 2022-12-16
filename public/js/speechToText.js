@@ -1,6 +1,4 @@
-const userName = document.getElementById("userName");
-const phone = document.getElementById("phone");
-const submit = document.getElementById("submit");
+const heading = document.querySelector("#heading");
 // import axios from "axios";
 // const axios = require("axios");
 
@@ -17,25 +15,29 @@ let speakFunction = (message) => {
   window.speechSynthesis.speak(msg);
 };
 
-if (getCookie("userType") == "blind") {
-  window.onload = function (event) {
-    speakFunction(
-      "You are on the feature page right now please say your feature number"
-    );
-    setTimeout(() => startRecognition(), 2000);
-  };
-}
+// if (getCookie("userType") == "blind") {
+//   window.onload = function (event) {
+//     speakFunction(
+//       "You are on the feature page right now please say your name and phoneNumber for registration"
+//     );
+//     setTimeout(() => startRecognition(), 2000);
+//   };
+// }
 
 // window.onload = function () {
 //   startRecognition();
 // };
 
+// document.getElementById("#recordButton").addEventListener("click", function () {
+//   startRecognition();
+// });
 function startRecognition() {
   if ("webkitSpeechRecognition" in window) {
     var recognition = new webkitSpeechRecognition();
 
-    recognition.lang = "en-English";
-
+    recognition.lang = "en-GB";
+    recognition.continuous = true;
+    recognition.interimResults = true;
     recognition.start();
 
     recognition.onstart = function () {
@@ -47,24 +49,17 @@ function startRecognition() {
     };
 
     recognition.onresult = function (event) {
-      console.log(event.results[0]);
+      //   console.log(event.results[0]);
       var text = event.results[0][0].transcript;
       console.log(text);
-      if (text == "image") {
-        window.location.replace("imageRecognition");
-      } else if (text == "speech") {
-        window.location.replace("speechToText");
-      } else if (text == "map") {
-        window.location.replace("sendMyLocation");
-      } else {
-        window.location.replace("imageRecognition");
-      }
-      let data = { name: text };
+      document.getElementById("helloWorld").innerHTML = text;
+      //   heading.innerHTML = text;
+      //   let data = { name: text };
 
       // axios.post("/register", { name: text }).then((res) => {
       //   console.log(res);
       // });
-      console.log("Recognized Text: " + text);
+      //   console.log("Recognized Text: " + text);
     };
   }
 }

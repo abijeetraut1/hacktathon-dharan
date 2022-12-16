@@ -9,6 +9,7 @@ const userSchema = new Schema({
     enum: ["deaf", "dumb", "blind"],
     default: "deaf",
   },
+  location: String,
 });
 
 module.exports = mongoose.model("User", userSchema);

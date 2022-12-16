@@ -27,7 +27,6 @@
       margin-top: 5%;
       padding: 8px;
       background: transparent;
-      
     }
     .navbar-nav>li>a{
       margin: 8px;
@@ -53,31 +52,17 @@
       padding: 5px;
       margin-top: 2%;
     }
-
-    form {
-        margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
- 
-        form * {
-            width: 50%;
-        }
- 
-        textarea {
-            /* width: 400px; */
-            height: 250px;
-        }
- 
-        h1 {
-            text-align: center;
-        }
-        .btn1:hover,.btn2:hover{
-            background-color : rgb(135, 169, 231);
-        }
+.lost{
+    /* border : 1px solid red; */
+    height : 100vh ; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.lost h3{
+    margin-bottom: 50px;
+}
 </style>
 </head>
 <body>
@@ -86,26 +71,23 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="feature-list">
-            <div class="content card shadow" style="padding-top: 30px;">
+            <div class="content card shadow">
               <img src="/images/undraw_pedestrian_crossing_l-6-jv.svg" width="100%" height="100px" alt="">
-              <ul class="navbar-nav" style="padding-top: 10px;">
+              <ul class="navbar-nav">
                 <li class="nav-item"><a href="imageRecognition" id="1" class="nav-link ">1.Image Recognition System</a></li>
-                <li class="nav-item"><a href="speechToText" id="2" class="nav-link active">2.Convert speech to text</a></li>
-                <li class="nav-item"><a href="sendMyLocation" class="nav-link">3.Send My Location</a></li>
+                <li class="nav-item"><a href="speechToText" id="2" class="nav-link">2.Convert speech to text</a></li>
+                <li class="nav-item"><a href="sendMyLocation" class="nav-link active">Send My Location</a></li>
               </ul>
-              <img src="/images/undraw_pedestrian_crossing_l-6-jv.svg" width="100%" height="100px" alt="">
-
             </div>
           </div>
         </div>
-        <div class="col-sm-8" >
-            <h1>Speech To Text</h1>
-            <form>
-                <textarea></textarea>
-                <button type="submit" class='btn1' style="margin-top: 20px;padding: 11px;">Speak!</button>
-                <button type="button" class="btn2" style="margin-top: 20px;padding: 11px;">Stop</button>
-            </form>
-          </div>
+        <div class="col-sm-8">
+            <div class="lost">
+                <h3>Are you lost ? </h3>
+                <button id="lostButton" onclick="getLocation()">Send My location</button>
+                <p id="pDemo"></p>
+                <p id="mapHolder"></p>
+            </div>
         </div>
       </div>
     </div>
@@ -126,51 +108,76 @@
   });
 </script>
 <script>
-   let speakFunction = (message) => {
+    let speakFunction = (message) => {
   var msg = new SpeechSynthesisUtterance();
   msg.text = message;
   window.speechSynthesis.speak(msg);
 };
-window.onload = function (event) {
+
+  window.onload = function (event) {
     speakFunction(
-      "You are on the speechToText page right now,double tab to start recording and hold space bar to stop"
+      "You are on the send my location page right now please tap the screen 2 times to send your location to the number you provided during registration"
     )
   };
-  window.addEventListener('dblclick',function(event){
-    spRec.start()
-  })
 
-  document.body.onkeyup = function(e) {
-  if (e.key == " " ||
-      e.code == "Space" ||      
-      e.keyCode == 32      
-  ) {
-    spRec.stop()
-  }
-}
-    let form = document.querySelector("form");
-    let sr = window.webkitSpeechRecognition || window.SpeechRecognition;
-    let spRec = new sr();
-    // spRec.lang = "nep";
-    spRec.continuous = true;
-    spRec.interimResults = true;
-    // console.log(spRec);
-    // form.addEventListener("submit", e => {
-    //     e.preventDefault();
-    //     spRec.start();
-    // })
-    spRec.onresult = res => {
-        let text = Array.from(res.results)
-            .map(r => r[0])
-            .map(txt => txt.transcript)
-            .join("");
-        form[0].value = text;
-        // console.log(text);
+    var x = document.getElementById("pDemo");
+    window.addEventListener("dblclick",function(){
+        getLocation();
+    })
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                // Success function
+                showPosition, 
+                // Error function
+                null, 
+                // Options. See MDN for details.
+                {
+                   enableHighAccuracy: true,
+                   timeout: 5000,
+                   maximumAge: 0
+                });
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
     }
-    // form[2].addEventListener("click", () => {
-    //     spRec.stop()
-    // })
-</script>
-<!-- <script src="./js/speechToText.js"></script> -->
+    
+    // function showPosition(position) {
+    //     x.innerHTML="Latitude: " + position.coords.latitude + 
+    //     "<br>Longitude: " + position.coords.longitude;  
+    // }
+
+
+    function showPosition(position) {
+    var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+    var img_url = "https://www.google.com/maps/search/?api=1&query="+position.coords.latitude+"%2C"+position.coords.longitude
+
+    document.getElementById("mapHolder").innerHTML = img_url
+
+    fetch("/getLocation", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            location: img_url,
+        }),
+    }).then(res=>{
+        
+        fetch('/getLocaionFromDb', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(res=>{
+            console.log(res)
+        })
+    })
+
+}
+
+    </script>
 </body>
 </html>
