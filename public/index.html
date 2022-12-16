@@ -1,69 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/4.1.0/tf.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
-
 </head>
+
 <body>
     <video id="video" style="background-color: black;" width="224" height="224" autoplay muted></video>
 
     <input type="textarea" class="textbox">
     <input type="button" value="SPEAK" class="button"> 
     <input type="button" value="click to open camera">
-
-    
-    <script>
-        // Load the TensorFlow.js library
-const tf = require("@tensorflow/tfjs");
-
-// Create a new TensorFlow.js model
-const model = async()=>{return await tf.loadLayersModel("./model.json")}
-
-// Load the image data from a file or URL
-const image = async()=>{return await tf.browser.fromPixels(imageElement)}
-
-// Pass the image data to the model to make predictions
-const predictions = async()=>{return await model.predict(image)}
-    </script>
-    <!-- <script>
-        // const model = async ()=>{
-        //    return  await mobilenet.load();
-        // }
-        // console.log(model)
-        console.log("hello")
-        navigator.mediaDevices.getUserMedia({video: true, audio: false})
-        .then(stream => {
-          video.srcObject = stream;
-        //   video.play();
-        });
-        const video = document.getElementById('video');
-        // const model = mobilenet.load().then( video.addEventListener('play', () => {
-        //   const predictions = model.classify(video);
-        //   console.log(predictions);
-        // }))
-        const model =  mobilenet.load();
-        console.log(model)
-
-video.addEventListener('play', () => {
-  const predictions = model.predict(video);
-  console.log(predictions);
-});
-
-        
-video.addEventListener('play', () => {
-  const predictions = model.classify(video);
-  console.log(predictions);
-});
-
-    
-       
-      </script> -->
-    <!-- <script src="../js/index.js"></script> -->
+    <script src="../js/index.js"></script>
 </body>
+
 </html>

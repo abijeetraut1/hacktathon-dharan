@@ -1,16 +1,11 @@
-// const speak = document.querySelector(".button");
-// const text = document.querySelector(".textbox");
+const speak = document.querySelector(".button");
+const text = document.querySelector(".textbox");
 
-// let speakOnClick = (message) => {
-//   var msg = new SpeechSynthesisUtterance();
-//   msg.text = "IF YOU ARE BLIND PRESS THE SCREEN THREE TIMES";
-//   window.speechSynthesis.speak(msg);
-// };
-
-// // window.addEventListener("load", function () {
-// //   // Call your function here
-// //   speakOnClick();
-// // });
+let speakOnClick = (message) => {
+  var msg = new SpeechSynthesisUtterance();
+  msg.text = "IF YOU ARE BLIND PRESS THE SCREEN THREE TIMES";
+  window.speechSynthesis.speak(msg);
+};
 
 // window.onbeforeunload = function () {
 //   speakOnClick();
@@ -75,44 +70,44 @@
 //   video.srcObject = stream;
 // });
 
-// click_button.addEventListener("click", function () {
-//   canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-//   let image_data_url = canvas.toDataURL("image/jpeg");
-
-//   // data url of the image
-//   console.log(image_data_url);
+window.onbeforeunload = function () {
+  speakOnClick();
+};
+// speak.addEventListener("click", (el) => {
+//   speakOnClick(text.value);
 // });
 
 // Load the TensorFlow.js library
 // const tf = require("@tensorflow/tfjs");
 import * as tf from "@tensorflow/tfjs";
 
-// Create a new TensorFlow.js model
-const model = async () => {
-  await tf.loadLayersModel("./model.json");
+// Add a startRecognition function to the onclick event of a button
+speak.onclick = function () {
+  startRecognition();
 };
 
-// Access the camera on the user's device
-const stream = async () => {
-  await navigator.mediaDevices.getUserMedia({
-    video: true,
-  });
-};
+function startRecognition() {
+  if ("webkitSpeechRecognition" in window) {
+    var recognition = new webkitSpeechRecognition();
 
-// Create a video element to display the camera feed
-const video = document.createElement("video");
-video.srcObject = stream;
-video.play();
+    recognition.lang = "en-US";
 
-// Set up a loop to process each video frame
-setInterval(async () => {
-  // Capture a frame from the video
-  const frame = tf.browser.fromPixels(video);
+    recognition.start();
 
-  // Pass the frame to the model to make predictions
-  const predictions = await model.predict(frame);
-  console.log(predictions);
+    recognition.onstart = function () {
+      console.log("Speech recognition has started.");
+    };
 
-  // Use the predictions to update the page
-  // ...
-}, 1000 / 30);
+    recognition.onend = function () {
+      console.log("Speech recognition has ended.");
+    };
+
+    recognition.onresult = function (event) {
+      var text = event.results[0][0].transcript;
+
+      console.log("Recognized Text: " + text);
+    };
+  }
+}
+
+// CLICK TO OPEN CAMERA
