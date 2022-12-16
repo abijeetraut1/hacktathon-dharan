@@ -64,6 +64,13 @@ exports.postRegister = async (req, res) => {
 exports.getFeatures = async (req, res) => {
   res.render("features");
 };
+
+exports.getImageRecognition = async (req, res) => {
+  res.render("imageRecognition");
+};
+exports.getSpeechToText = async (req, res) => {
+  res.render("getSpeechToText");
+};
 exports.test = async (req, res) => {
   // var config = {
   //   imageName: 'path-to-image.jpg', // preferrably in JPG format and less than 100 kB
