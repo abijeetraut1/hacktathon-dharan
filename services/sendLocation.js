@@ -8,7 +8,7 @@ exports.getLocationFromDb = async (req, res) => {
   const id = req.user.id;
   const user = await User.findById(id);
   const location = user.location;
-  const phone = user.phone || req.body.phone;
+  const phone = "+977 9816366094";
   const success = await twilio.messages.create({
     body: `Hello , I am  here at : ${location}`,
     from: process.env.FROM_NUMBER,

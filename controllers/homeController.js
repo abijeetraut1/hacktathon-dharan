@@ -14,7 +14,6 @@ const cookieOptions = {
   // ),
   expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
   // maxAge: 900000,
-  httpOnly: true,
 };
 
 const createToken = (user, statusCode, res) => {
@@ -52,7 +51,7 @@ exports.dumbFeature = async (req, res) => {
 };
 exports.postRegister = async (req, res) => {
   const { name } = req.body;
-  const phone = req.body.phone || 9816366094;
+  const phone = req.body.phone;
   if (!name) return res.send("name is required");
   const userExists = await User.findOne({ name: name });
   if (userExists) return res.render("register");

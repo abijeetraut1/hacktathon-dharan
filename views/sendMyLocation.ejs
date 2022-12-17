@@ -23,7 +23,7 @@
     .card
     {
       position:sticky;
-      height: 550px;
+      height: 438px;
       margin-top: 5%;
       padding: 8px;
       background: transparent;
@@ -74,9 +74,9 @@
             <div class="content card shadow">
               <img src="/images/undraw_pedestrian_crossing_l-6-jv.svg" width="100%" height="100px" alt="">
               <ul class="navbar-nav">
-                <li class="nav-item"><a href="imageRecognition" id="1" class="nav-link ">1.Image Recognition System</a></li>
-                <li class="nav-item"><a href="speechToText" id="2" class="nav-link">2.Convert speech to text</a></li>
-                <li class="nav-item"><a href="sendMyLocation" class="nav-link active">Send My Location</a></li>
+                <li class="nav-item"><a href="/imageRecognition" id="1" class="nav-link ">Image Recognition System</a></li>
+                <li class="nav-item"><a href="/speechToText" id="2" class="nav-link">Convert speech to text</a></li>
+                <li class="nav-item"><a href="/sendMyLocation" class="nav-link active">Send My Location</a></li>
               </ul>
             </div>
           </div>
@@ -165,18 +165,31 @@
             location: img_url,
         }),
     }).then(res=>{
-        
-        fetch('/getLocaionFromDb', {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then(res=>{
-            console.log(res)
-        })
-    })
+      console.log(res)
+      function getCookie(name) {
+       const value = `; ${document.cookie}`;
+       const parts = value.split(`; ${name}=`);
+       if (parts.length === 2) {
+         return parts.pop().split(";").shift();
+       }
+     }
+      console.log(getCookie('jwt'))
+      fetch('/getLocaionFromDb', {
+          method: "POST",
 
-}
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization" : "Bearer "+ getCookie('jwt')
+          },
+          body: JSON.stringify({
+            phone:"+977 9816366094"
+        }),
+      }).then(res=>{
+          console.log(res)
+      })
+    })
+    
+  }
 
     </script>
 </body>

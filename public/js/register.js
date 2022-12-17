@@ -19,6 +19,7 @@ let speakFunction = (message) => {
 
 if (getCookie("userType") == "blind") {
   window.onload = function (event) {
+    console.log("hello");
     speakFunction(
       "You are on the register page right now please say your name for registration"
     );
