@@ -29,7 +29,7 @@
       position: sticky;
       height: 438px;
       margin-top: 5%;
-      padding: 8px;
+      padding: 27px;
       background: transparent;
     }
     .navbar-nav>li>a {
@@ -52,6 +52,16 @@
         height: auto;
       }
     }
+  @media (min-width: 576px)
+  {
+
+    .col-sm-8 {
+        flex: 0 0 auto;
+        width: 66.66666667%;
+        /* background-color: red; */
+        padding: 30px 65px;
+    }
+  }
     #click-photo {
       height: 100%;
       width: 100%;
@@ -73,13 +83,15 @@
       height: 100vh;
       width: 68vw;
       background-color: transparent;
+      
       border-color: transparent;
     }
     #video {
       background-color: rgb(44, 43, 43);
-      border-radius: 5rem;
+      border-radius: 3rem;
       max-height: fit-content;
       max-width: fit-content;
+      /* background-color: red; */
     }
     .just-div {
       background-color: white;
@@ -100,11 +112,11 @@
         <div class="col-sm-4">
           <div class="feature-list">
             <div class="content card shadow"  style="padding-top: 30px;">
-              <img src="/images/undraw_pedestrian_crossing_l-6-jv.svg" width="100%" height="100px" alt="" >
+              <img src="\images\Day of people with disability-pana.svg" width="100%" height="100px" alt="" >
               <ul class="navbar-nav" style="padding-top: 10px;">
-                <li class="nav-item"><a href="imageRecognition" id="1" class="nav-link active">Image Recognition System</a></li>
-                <li class="nav-item"><a href="speechToText" id="2" class="nav-link ">Convert speech to text</a></li>
-                <li class="nav-item"><a href="sendMyLocation" class="nav-link">Send My Location</a></li>
+                <li class="nav-item" style="padding: 10px;"><a href="imageRecognition" id="1" class="nav-link active">Image Recognition System</a></li>
+                <li class="nav-item" style="padding: 10px;"><a href="speechToText" id="2" class="nav-link ">Convert speech to text</a></li>
+                <li class="nav-item" style="padding: 10px;"><a href="sendMyLocation" class="nav-link">Send My Location</a></li>
               </ul>
             </div>
           </div>
@@ -112,6 +124,7 @@
         <div class="col-sm-8">
           <div class="content">
             <video id="video" width="320" height="240" autoplay></video>
+            <!-- <h1 style="color: white;">fjlasdf</h1> -->
             <button id="click-photo"></button>
             <div class="just-div">
               <canvas id="canvas" width="320" height="240"></canvas>
