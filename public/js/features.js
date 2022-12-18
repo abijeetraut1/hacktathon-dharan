@@ -19,18 +19,23 @@ let speakFunction = (message) => {
   window.speechSynthesis.speak(msg);
 };
 
-if (getCookie("userType") == "blind") {
-  window.onload = function (event) {
-    speakFunction(
-      "You are on the feature page right now for image recognition say image, speectToText say speech and for map say map"
-    );
-    setTimeout(() => startRecognition(), 2000);
-  };
-}
-
-window.onload = function () {
-  startRecognition();
+window.onload = function (event) {
+  const name = getCookie("name");
+  speakFunction(
+    `You are on the feature page right now ${name} for image recognition say image, speectToText say speech and for map say map`
+  );
+  setTimeout(() => startRecognition(), 7000);
 };
+
+window.addEventListener("dblclick", function () {
+  var link = document.getElementById("featureLink");
+
+  // add a click event handler to the link
+  link.click();
+});
+// window.onload = function () {
+//   startRecognition();
+// };
 
 // image recognication starts
 
@@ -129,7 +134,9 @@ function startRecognition() {
   if ("webkitSpeechRecognition" in window) {
     var recognition = new webkitSpeechRecognition();
 
-    recognition.lang = "en-English";
+    recognition.lang = "en-GB";
+    recognition.continuous = true;
+    recognition.interimResults = true;
 
     recognition.start();
 
@@ -148,21 +155,15 @@ function startRecognition() {
       // window.addEventListener("dblClick", () => {
 
       // })
-      if (text == "image") {
-        window.location.replace("imageRecognition");
-      } else if (text == "hello") {
-        window.location.replace("speechToText");
-      } else if (text == "map") {
-        window.location.replace("sendMyLocation");
+      if (text == "image" || text.includes("image")) {
+        window.location.replace("/imageRecognition");
+      } else if (text == "speech" || text.includes("speech")) {
+        window.location.replace("/speechToText");
+      } else if (text == "map" || text.includes("map")) {
+        window.location.replace("/sendMyLocation");
       } else {
         window.location.replace("features");
       }
-      let data = { name: text };
-
-      // axios.post("/register", { name: text }).then((res) => {
-      //   console.log(res);
-      // });
-      console.log("Recognized Text: " + text);
     };
   }
 }

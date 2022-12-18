@@ -19,7 +19,6 @@ let speakFunction = (message) => {
 
 if (getCookie("userType") == "blind") {
   window.onload = function (event) {
-    console.log("hello");
     speakFunction(
       "You are on the register page right now please say your name for registration"
     );
@@ -35,7 +34,9 @@ function startRecognition() {
   if ("webkitSpeechRecognition" in window) {
     var recognition = new webkitSpeechRecognition();
 
-    recognition.lang = "en-US";
+    recognition.lang = "en-GB";
+    recognition.continuous = true;
+    recognition.interimResults = true;
 
     recognition.start();
 

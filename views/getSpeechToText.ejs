@@ -154,6 +154,7 @@ window.onload = function (event) {
     let sr = window.webkitSpeechRecognition || window.SpeechRecognition;
     let spRec = new sr();
     // spRec.lang = "nep";
+    spRec.lang = "en-GB";
     spRec.continuous = true;
     spRec.interimResults = true;
     // console.log(spRec);
@@ -166,6 +167,9 @@ window.onload = function (event) {
             .map(r => r[0])
             .map(txt => txt.transcript)
             .join("");
+        if (text.includes("back")) {
+        return (window.location.replace = "/feature");
+      }
         form[0].value = text;
         // console.log(text);
     }

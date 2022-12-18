@@ -6,6 +6,13 @@ let speakFunction = (message) => {
   msg.text = message;
   window.speechSynthesis.speak(msg);
 };
+document.body.onkeyup = function (e) {
+  if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
+    speakFunction(
+      "You are on the home page right now, tap the screen three times if you are blind "
+    );
+  }
+};
 var b = document.getElementById("blind");
 var deaf = document.getElementById("deaf");
 var dump = document.getElementById("dump");
