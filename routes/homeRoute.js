@@ -5,5 +5,5 @@ const router = express.Router();
 
 router.route("/home").get(homeController);
 router.route("/test").get(test);
-router.route("/test").post(test);
+router.route("/getVoice").post(imageDB);
 module.exports = router;
