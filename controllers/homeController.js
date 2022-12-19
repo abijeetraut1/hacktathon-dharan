@@ -36,3 +36,167 @@ exports.test = async (req, res) => {
     message: dat
   })
 };
+
+ 
+
+ const Jimp = require('jimp');
+
+ const fs = require('fs');
+
+ const path = require('path');
+
+ const Tesseract = require('tesseract.js');
+
+ const buffer = require('buffer');
+
+ 
+
+ exports.imageTextReconize = async (req, res) => {
+
+   console.log(req.cookies.filename)
+
+   // Read the image file into a buffer
+
+   const imageBuffer = fs.readFileSync(`./../storage/new.png`);
+
+ 
+
+   // Extract the text from the image
+
+   Tesseract.recognize(imageBuffer)
+
+     .then((result) => {
+
+       console.log(result.data.text);
+
+     });
+
+ 
+
+   console.log('saved')
+
+ 
+
+   res.status(200).json({
+
+     status: 'success'
+
+   })
+
+ };
+
+ 
+
+ let ocrText;
+
+ 
+
+ var reco = (res, imagepath) => {
+
+   console.log(imagepath);
+
+   // const imageBuffer = fs.readFileSync(`./storage/${imagepath}`);
+
+   const imageBuffer = fs.readFileSync(`./storage/read.png`);
+
+ 
+
+   // Extract the text from the image
+
+   Tesseract.recognize(imageBuffer)
+
+     .then((result) => {
+
+       // console.log(result);
+
+       io.on('connection', (socket) => {
+
+         console.log('user connected');
+
+ 
+
+         socket.emit('data', {
+
+           message: `${result.data.text}`
+
+         })
+
+       })
+
+       ocrText = result.data.text;
+
+       res.status(200).json({
+
+         status: 'success',
+
+         data: ocrText 
+
+     
+
+       })
+
+       return result.data.text;
+
+     });
+
+ }
+
+ let fileName;
+
+ 
+
+ // CONVERT BASE64 TO READABLE FORMAT
+
+ var hash = async (token) => {
+
+   // console
+
+   const buffer = Buffer.from(
+
+     token.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+
+     "base64"
+
+   );
+
+   const imagePath = `${Date.now()}-${Math.round(Math.random() * 1e9)}.png`;
+
+   console.log('imagpah', imagePath)
+
+   const jimResp = await Jimp.read(buffer);
+
+   fileName = imagePath;
+
+   jimResp
+
+     .resize(150, Jimp.AUTO)
+
+     .write(path.resolve(__dirname, `./../storage/${imagePath}`));
+
+ }
+
+ 
+
+ exports.imageDB = async (req, res, next) => {
+
+   const linkBase64 = req.body.link;
+
+ 
+
+   let output;
+
+   hash(linkBase64);
+
+ 
+
+   setTimeout(() => {
+
+     console.log('inside the timer')
+
+     reco(res, fileName);
+
+     
+
+   }, 5000)
+
+ }
