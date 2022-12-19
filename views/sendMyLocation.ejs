@@ -116,13 +116,15 @@
 
   window.onload = function (event) {
     speakFunction(
-      "You are on the send my location page right now please tap the screen 2 times to send your location to the number you provided during registration"
+      "You are on the send my location page right now please tap the screen 2 times to send your location to your close ones"
     )
   };
 
     var x = document.getElementById("pDemo");
     window.addEventListener("dblclick",function(){
         getLocation();
+        speakFunction("Location send sucessfully"
+    )
     })
 
     function getLocation() {

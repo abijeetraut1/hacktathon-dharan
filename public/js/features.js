@@ -24,7 +24,7 @@ window.onload = function (event) {
   speakFunction(
     `You are on the feature page right now ${name} for image recognition say image, speectToText say speech and for map say map`
   );
-  setTimeout(() => startRecognition(), 7000);
+  setTimeout(() => startRecognition(), 10000);
 };
 
 window.addEventListener("dblclick", function () {
@@ -157,6 +157,9 @@ function startRecognition() {
       // })
       if (text == "image" || text.includes("image")) {
         window.location.replace("/imageRecognition");
+        speakFunction(
+          `You are on the image Recognition page right now ${name} for image recognition tap on screen`
+        );
       } else if (text == "speech" || text.includes("speech")) {
         window.location.replace("/speechToText");
       } else if (text == "map" || text.includes("map")) {
