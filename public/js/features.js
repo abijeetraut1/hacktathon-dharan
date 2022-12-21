@@ -27,6 +27,21 @@ window.onload = function (event) {
   setTimeout(() => startRecognition(), 10000);
 };
 
+document.addEventListener("keyup", function (event) {
+  if (event.key == "Ctrl") {
+    window.location.replace("/sendMyLocation");
+  }
+  if (event.key == "Shift") {
+    window.location.replace("/speechToText");
+  }
+  if (event.key == "Enter") {
+    window.location.replace("/imageRecognition");
+    speakFunction(
+      `You are on the image Recognition page right now ${name} for image recognition tap on screen`
+    );
+  }
+});
+
 window.addEventListener("dblclick", function () {
   var link = document.getElementById("featureLink");
 
@@ -157,15 +172,10 @@ function startRecognition() {
       // })
       if (text == "image" || text.includes("image")) {
         window.location.replace("/imageRecognition");
-        speakFunction(
-          `You are on the image Recognition page right now ${name} for image recognition tap on screen`
-        );
       } else if (text == "speech" || text.includes("speech")) {
         window.location.replace("/speechToText");
       } else if (text == "map" || text.includes("map")) {
         window.location.replace("/sendMyLocation");
-      } else {
-        window.location.replace("features");
       }
     };
   }
